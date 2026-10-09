@@ -1,4 +1,4 @@
-/*
+
 class OtpRequestModel {
   final String phone;
   final String deviceId;
@@ -18,23 +18,25 @@ class OtpRequestModel {
       'platform': platform,
     };
   }
+
+
+  ////////// for fromJson always use factory
+//   factory OtpRequestModel.fromJson(
+//     Map<String,dynamic> json,
+//   ){
+
+//     return OtpRequestModel(
+//       id: json['id'],
+//       name: json['name'],
+//     );
+
+//  }
+
+//  CurrentCityEntity toEntity(){
+//     return CurrentCityEntity(
+//        name:name,
+//     );
+//  }
 }
 
-////////// for fromJson always use factory
-  factory CityModel.fromJson(
-    Map<String,dynamic> json,
-  ){
 
-    return CityModel(
-      id: json['id'],
-      name: json['name'],
-    );
-
- }
-
- CurrentCityEntity toEntity(){
-    return CurrentCityEntity(
-       name:name,
-    );
- }
-*/

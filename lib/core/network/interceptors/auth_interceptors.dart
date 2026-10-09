@@ -1,0 +1,25 @@
+/*import 'package:dio/dio.dart';
+
+class AuthInterceptor extends Interceptor {
+  final SecureStorage secureStorage;
+
+  AuthInterceptor(this.secureStorage);
+
+  @override
+  Future<void> onRequest(
+    RequestOptions options,
+    RequestInterceptorHandler handler,
+  ) async {
+    final token = await secureStorage.read(
+      'access_token',
+    );
+
+    if (token != null && token.isNotEmpty) {
+      options.headers['Authorization'] =
+          'Bearer $token';
+    }
+
+    handler.next(options);
+  }
+}
+*/

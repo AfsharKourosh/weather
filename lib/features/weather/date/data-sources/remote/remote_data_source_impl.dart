@@ -1,10 +1,6 @@
-/*
-abstract interface class AuthRemoteDataSource {
-  Future<OtpResponseModel> otp(
-    OtpRequestModel request,
-  );
-}
---------------------------------------------------
+import 'package:weather/core/network/client/api_client.dart';
+import 'package:weather/features/weather/date/data-sources/remote/remote_data_source.dart';
+
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   const AuthRemoteDataSourceImpl(this.apiClient);
 
@@ -24,4 +20,3 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     );
   }
 }
-*/

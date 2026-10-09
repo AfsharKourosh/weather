@@ -16,6 +16,11 @@ dependencies:
 
 
   cupertino_icons: ^1.0.8
+  dio: ^5.11.1
+  get_it: ^9.3.0
+  connectivity_plus: ^7.3.2
+  equatable: ^3.0.0
+  dartz: ^0.10.1
 
 dev_dependencies:
   flutter_test:
@@ -37,12 +42,7 @@ flutter:
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf
-  
   #         style: italic
-    
-  
-  
-  
   #         weight: 70
   
   

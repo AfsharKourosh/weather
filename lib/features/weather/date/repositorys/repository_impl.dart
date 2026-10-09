@@ -1,4 +1,10 @@
-/*
+
+import 'package:dartz/dartz.dart';
+import 'package:weather/core/error/failures/failure.dart';
+import 'package:weather/features/weather/date/data-sources/remote/remote_data_source.dart';
+import 'package:weather/features/weather/domain/entitys/entity.dart';
+import 'package:weather/features/weather/domain/repositorys/repository.dart';
+
 class AuthRepositoryImpl implements AuthRepository {
   const AuthRepositoryImpl(this.remoteDataSource);
 
@@ -6,7 +12,7 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<Either<Failure, OtpResponseEntity>> otp(
-    OtpRequest params,
+    String params,
   ) async {
     try {
       final model = await remoteDataSource.otp(
@@ -31,4 +37,3 @@ class AuthRepositoryImpl implements AuthRepository {
     }
   }
 }
-*/
