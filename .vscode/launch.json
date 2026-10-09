@@ -10,8 +10,10 @@
             "type": "dart",
             "program": "lib/main.dart",
             "args": [
+                "--no-pub",
+                "--flavor=development",
                 "--dart-define=ENVIRONMENT=development",
-                "--dart-define=BASE_URL=https://openweathermap.org/"
+                "--dart-define=BASE_URL=https://openweathermap.org"
             ]
         },
         {

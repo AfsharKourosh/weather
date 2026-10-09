@@ -38,6 +38,24 @@ android {
     }
 }
 
+flavorDimensions += "environment"
+
+productFlavors {
+    create("development") {
+        dimension = "environment"
+        applicationIdSuffix = ".dev"
+    }
+
+    create("staging") {
+        dimension = "environment"
+        applicationIdSuffix = ".staging"
+    }
+
+    create("production") {
+        dimension = "environment"
+    }
+}
+
 kotlin {
     compilerOptions {
         jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
