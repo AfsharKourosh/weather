@@ -1,11 +1,16 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:weather/config/environment/environment_config.dart';
 import 'package:weather/core/network/client/api_client.dart';
 import 'package:weather/core/network/client/dio_api_client.dart';
-import 'package:weather/core/network/interceptors/logger_interceptor.dart';
+import 'package:weather/core/network/connectivity/connectivity_service.dart';
 
 void setupNetworkDependencies(GetIt sl) {
+  sl.registerLazySingleton<ConnectivityService>(
+    () => ConnectivityServiceImpl(Connectivity()),
+  );
   sl.registerLazySingleton<Dio>(() {
     final environment = sl<EnvironmentConfig>();
     final dio = Dio(
@@ -17,15 +22,12 @@ void setupNetworkDependencies(GetIt sl) {
     );
 
     dio.interceptors.addAll(
-      [],
+      [if (environment.isDevelopment) PrettyDioLogger()],
       // AuthInterceptor(
       //   sl<SecureStorage>(),
       // ),
     );
 
-    if (environment.isDevelopment) {
-      dio.interceptors.add(LoggerInterceptor());
-    }
     return dio;
   });
   sl.registerLazySingleton<ApiClient>(() => DioApiClient(sl<Dio>()));

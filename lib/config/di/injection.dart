@@ -13,6 +13,7 @@ Future<void> initDependencies() async {
   // await setupStorageDependencies(sl);
 
   // Network
+  
   setupNetworkDependencies(sl);
 
   //   sl.registerLazySingleton<GoRouter>(

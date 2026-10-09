@@ -5,7 +5,7 @@ core/
     ├── string_extensions.dart
     ├── num_extensions.dart
     └── iterable_extensions.dart
-    -------------------------------------
+--------------------------------------
     import 'package:flutter/material.dart';
 
 extension BuildContextExtensions on BuildContext {

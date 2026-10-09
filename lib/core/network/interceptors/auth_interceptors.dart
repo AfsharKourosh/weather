@@ -10,9 +10,15 @@ class AuthInterceptor extends Interceptor {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    final token = await secureStorage.read(
-      'access_token',
-    );
+    final token = await
+    
+    
+    **********
+     secureStorage
+    **********
+
+
+    .getAccessToken();
 
     if (token != null && token.isNotEmpty) {
       options.headers['Authorization'] =
