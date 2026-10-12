@@ -20,7 +20,7 @@ void setupNetworkDependencies(GetIt sl) {
         receiveTimeout: const Duration(seconds: 15),
       ),
     );
-
+// Logger should be added after other interceptors.
     dio.interceptors.addAll(
       [if (environment.isDevelopment) PrettyDioLogger()],
       // AuthInterceptor(
