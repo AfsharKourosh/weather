@@ -1,5 +1,7 @@
 plugins {
     id("com.android.application")
+    id("com.google.gms.google-services")
+
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
 }
@@ -36,12 +38,11 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
     }
-}
+    
+    flavorDimensions += "environment"
 
-flavorDimensions += "environment"
-
-productFlavors {
-    create("development") {
+    productFlavors {
+         create("development") {
         dimension = "environment"
         applicationIdSuffix = ".dev"
     }
@@ -55,6 +56,9 @@ productFlavors {
         dimension = "environment"
     }
 }
+}
+
+
 
 kotlin {
     compilerOptions {
@@ -64,4 +68,11 @@ kotlin {
 
 flutter {
     source = "../.."
+}
+
+dependencies {
+    implementation(platform("com.google.firebase:firebase-bom:35.0.0"))
+
+    // Add Firebase products you need
+    implementation("com.google.firebase:firebase-analytics")
 }

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "45272543783",
+    "project_id": "notif-weather-4012d",
+    "storage_bucket": "notif-weather-4012d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:45272543783:android:5e9b56ca3f9dee87a01402",
+        "android_client_info": {
+          "package_name": "com.example.weather.dev"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpaYOyAiGzqDEH39eigVBzELNWqxAkCOg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:45272543783:android:3c0da8538d0cb9d6a01402",
+        "android_client_info": {
+          "package_name": "com.example.weather.staging"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpaYOyAiGzqDEH39eigVBzELNWqxAkCOg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
