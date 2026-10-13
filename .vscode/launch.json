@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Development",
+            "name": "development",
             "request": "launch",
             "type": "dart",
             "program": "lib/main.dart",
@@ -17,23 +17,27 @@
             ]
         },
         {
-            "name": "Staging",
+            "name": "staging",
             "request": "launch",
             "type": "dart",
             "program": "lib/main.dart",
             "args": [
+                "--no-pub",
+                "--flavor=staging",
                 "--dart-define=ENVIRONMENT=staging",
-                "--dart-define=BASE_URL=https://staging-api.example.com"
+                "--dart-define=BASE_URL=https://openweathermap.org"
             ]
         },
         {
-            "name": "Production",
+            "name": "production",
             "request": "launch",
             "type": "dart",
             "program": "lib/main.dart",
             "args": [
+                "--no-pub",
+                "--flavor=production",
                 "--dart-define=ENVIRONMENT=production",
-                "--dart-define=BASE_URL=https://api.example.com"
+                "--dart-define=BASE_URL=https://openweathermap.org"
             ]
         },
         {

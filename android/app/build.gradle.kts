@@ -42,20 +42,31 @@ android {
     flavorDimensions += "environment"
 
     productFlavors {
-         create("development") {
+
+    create("development") {
         dimension = "environment"
         applicationIdSuffix = ".dev"
+        /*
+        resValue("string", "app_name", "Weather Dev")
+        */
     }
 
     create("staging") {
         dimension = "environment"
         applicationIdSuffix = ".staging"
+        /*
+        resValue("string", "app_name", "Weather Stage")
+        */
     }
 
     create("production") {
         dimension = "environment"
+        /*
+        resValue("string", "app_name", "Weather")
+        */
     }
 }
+
 }
 
 
