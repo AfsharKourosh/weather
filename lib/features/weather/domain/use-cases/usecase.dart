@@ -1,31 +1,22 @@
-/*
 import 'package:dartz/dartz.dart';
+import 'package:weather/core/error/failures/failure.dart';
+import 'package:weather/core/use-case/use_case.dart';
+import 'package:weather/features/weather/date/models/weather_req_model.dart';
+import 'package:weather/features/weather/domain/entitys/weather_res_entity.dart';
+import 'package:weather/features/weather/domain/repositorys/weather_repository.dart';
 
-class LoginUseCase implements UseCase<UserEntity, LoginParams> {
+///class WeatherUseCase implements UseCase<Res, Req>
+class WeatherUseCase implements UseCase<WeatherResEntity, WeatherReqModel> {
+  final WeatherRepository _weatherRepository;
 
-  final AuthRepository repository;
+  WeatherRepository get weatherRepository => _weatherRepository;
 
-
-  LoginUseCase(this.repository);
-
+  new(this._weatherRepository);
 
   @override
-  Future<Either<Failure, UserEntity>> call(
-    LoginParams params,
+  Future<Either<Failure, WeatherResEntity>> call(
+    WeatherReqModel weatherReqModel,
   ) async {
-
-    return await repository.login(params);
-
+    return await _weatherRepository.curentWeather(weatherReqModel);
   }
 }
---------------------------------------------------
-class LoginParams {
-
-  final String phone;
-
-  const LoginParams({
-    required this.phone,
-  });
-
-}
-*/
