@@ -2,6 +2,12 @@ import 'package:get_it/get_it.dart';
 import 'package:weather/config/di/network_module.dart';
 import 'package:weather/config/environment/environment_config.dart';
 import 'package:weather/config/environment/environment_loader.dart';
+import 'package:weather/core/network/client/api_client.dart';
+import 'package:weather/features/weather/date/data-sources/remote/weather_data_source.dart';
+import 'package:weather/features/weather/date/repositorys/weather_repository_impl.dart';
+import 'package:weather/features/weather/domain/repositorys/weather_repository.dart';
+import 'package:weather/features/weather/domain/use-cases/weather_usecase.dart';
+import 'package:weather/features/weather/presentation/bloc-cubit/bloc/weather_bloc.dart';
 
 final sl = GetIt.instance;
 
@@ -13,7 +19,7 @@ Future<void> initDependencies() async {
   // await setupStorageDependencies(sl);
 
   // Network
-  
+
   setupNetworkDependencies(sl);
 
   //   sl.registerLazySingleton<GoRouter>(
@@ -22,12 +28,32 @@ Future<void> initDependencies() async {
   //   ),
   // );
 
-  // sl.registerLazySingleton<ApiClient>(
-  // () => DioApiClient(sl<Dio>()),
-
   // setupAuthDependencies(sl);
   // .
   // .
   // .
   // featurs
+  setupWeatherDependencies(sl);
+}
+
+void setupWeatherDependencies(GetIt sl) {
+  // Data Source
+  sl.registerLazySingleton<WeatherDataSource>(
+    () => WeatherDataSourceImpl(sl<ApiClient>()),
+  );
+
+  // Repository
+  sl.registerLazySingleton<WeatherRepository>(
+    () => WeatherRepositoryImpl(sl<WeatherDataSource>()),
+  );
+
+  // Use Case
+  sl.registerLazySingleton<WeatherUseCase>(
+    () => WeatherUseCase(sl<WeatherRepository>()),
+  );
+
+  // bloc/cubit
+  sl.registerLazySingleton<WeatherBloc>(
+    () => WeatherBloc(sl<WeatherUseCase>()),
+  );
 }

@@ -7,6 +7,7 @@ import 'package:weather/core/network/client/api_client.dart';
 import 'package:weather/core/network/client/dio_api_client.dart';
 import 'package:weather/core/network/connectivity/connectivity_service.dart';
 
+
 void setupNetworkDependencies(GetIt sl) {
   sl.registerLazySingleton<ConnectivityService>(
     () => ConnectivityServiceImpl(Connectivity()),
