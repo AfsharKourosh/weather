@@ -7,7 +7,7 @@ class CounterScreen extends StatelessWidget {
   const CounterScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { 
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(middle: Text('data')),
       child: SafeArea(
@@ -16,6 +16,24 @@ class CounterScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           spacing: 40,
           children: [
+            /*
+            Builder(builder: (context) {
+            var state = context.watch<CounterCubit>().state;
+              return Text('data');
+            },)
+---------------------------------------------------------------------
+              BlocConsumer(buildWhen: (previous, current) {
+
+              },
+                builder: (context, state) {
+
+            }, listener: (context, state) {
+
+            },listenWhen: (previous, current) {
+
+            },
+            ),
+            */
             BlocBuilder<CounterCubit, CounterState>(
               builder: (context, state) {
                 if (state is CounterStateChanged) {

@@ -21,3 +21,43 @@ final class CounterStateChanged extends CounterState {
   @override
   List<Object> get props => [counter];
 }
+/*
+class ImageState {
+  SelectImageStatus selectedImageStatus;
+  GetRecentImagesStatus recentImagesStatus;
+
+  ImageState({
+    required this.recentImagesStatus,
+    required this.selectedImageStatus,
+  });
+
+  ImageState copyWith({
+    SelectImageStatus? selectedImageStatus,
+    GetRecentImagesStatus? recentImagesStatus,
+  }) {
+    return ImageState(
+      recentImagesStatus: recentImagesStatus ?? this.recentImagesStatus,
+      selectedImageStatus: selectedImageStatus ?? this.selectedImageStatus,
+    );
+  }
+}
+---------------------------------------------------------------------------
+abstract class SelectImageStatus {}
+
+class SelectImageInitial extends SelectImageStatus {}
+
+class SelectImageLoading extends SelectImageStatus {}
+
+class SelectImageDone extends SelectImageStatus {
+  final ImageModel? selectedImage;
+  SelectImageDone({this.selectedImage});
+}
+
+class SelectImageError extends SelectImageStatus {
+  final String message;
+  SelectImageError(this.message);
+}
+
+
+
+*/
