@@ -11,7 +11,7 @@ import 'package:weather/features/weather/domain/repositorys/weather_repository.d
 class WeatherRepositoryImpl implements WeatherRepository {
   final WeatherDataSource weatherDataSource;
 
-  new(this.weatherDataSource);
+  WeatherRepositoryImpl(this.weatherDataSource);
   @override
   Future<Either<Failure, WeatherResEntity>> curentWeather(
     WeatherReqModel weatherReqModel,
