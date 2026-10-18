@@ -5,6 +5,6 @@ class WeatherReqModel {
   const WeatherReqModel({required this.cityName, required this.measure});
 
   Map<String, dynamic> toQueryParameters() {
-    return {'q': 'cityName', 'units': 'measure'};
+    return {'q': cityName, 'units': measure};
   }
 }

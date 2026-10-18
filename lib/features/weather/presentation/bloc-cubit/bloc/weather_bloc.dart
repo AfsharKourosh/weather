@@ -11,7 +11,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   final WeatherUseCase weatherUseCase;
   WeatherBloc(this.weatherUseCase)
     : super(WeatherState(curentWeatherStatus: CurentWeatherLoading())) {
-    on<CurentWeather>((event, emit) async {
+    on<GetCurentWeather>((event, emit) async {
       emit(state.copyWith(curentWeatherStatus: CurentWeatherLoading()));
 
       final result = await weatherUseCase(event.weatherReqModel);
