@@ -1,12 +1,37 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:weather/features/weather/date/models/weather_req_model.dart';
+import 'package:weather/features/weather/domain/use-cases/weather_usecase.dart';
+import 'package:weather/features/weather/presentation/bloc-cubit/bloc/weather_status.dart';
 
 part 'weather_event.dart';
 part 'weather_state.dart';
 
 class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
-  WeatherBloc() : super(WeatherInitial()) {
-    on<CurentWeather>((event, emit) {});
+  final WeatherUseCase weatherUseCase;
+  WeatherBloc(this.weatherUseCase)
+    : super(WeatherState(curentWeatherStatus: CurentWeatherLoading())) {
+    on<CurentWeather>((event, emit) async {
+      emit(state.copyWith(curentWeatherStatus: CurentWeatherLoading()));
+
+      final result = await weatherUseCase(event.weatherReqModel);
+
+      result.fold(
+        (failure) {
+          emit(
+            state.copyWith(
+              curentWeatherStatus: CurentWeatherError(failure.message),
+            ),
+          );
+        },
+        (weather) {
+          emit(
+            state.copyWith(
+              curentWeatherStatus: CurentWeatherCompleted(weather),
+            ),
+          );
+        },
+      );
+    });
   }
 }

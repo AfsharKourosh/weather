@@ -6,9 +6,9 @@ sealed class WeatherEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
 class CurentWeather extends WeatherEvent {
   final WeatherReqModel weatherReqModel;
 
   const CurentWeather(this.weatherReqModel);
-  
 }

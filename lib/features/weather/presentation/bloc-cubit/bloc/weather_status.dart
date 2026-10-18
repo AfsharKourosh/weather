@@ -6,9 +6,9 @@ sealed class CurentWeatherStatus extends Equatable {
   List<Object?> get props => [];
 }
 
-class CurentWeatherLoading extends CurentWeatherStatus {}
+final class CurentWeatherLoading extends CurentWeatherStatus {}
 
-class CurentWeatherCompleted extends CurentWeatherStatus {
+final class CurentWeatherCompleted extends CurentWeatherStatus {
   final WeatherResEntity weatherResEntity;
   CurentWeatherCompleted(this.weatherResEntity);
 
@@ -16,7 +16,7 @@ class CurentWeatherCompleted extends CurentWeatherStatus {
   List<Object?> get props => [weatherResEntity];
 }
 
-class CurentWeatherError extends CurentWeatherStatus {
+final class CurentWeatherError extends CurentWeatherStatus {
   final String? message;
   CurentWeatherError(this.message);
   @override

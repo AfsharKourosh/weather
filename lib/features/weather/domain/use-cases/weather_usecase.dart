@@ -7,14 +7,14 @@ import 'package:weather/features/weather/domain/repositorys/weather_repository.d
 
 ///class WeatherUseCase implements UseCase<Res, Req>
 class WeatherUseCase implements UseCase<WeatherResEntity, WeatherReqModel> {
-  final WeatherRepository _weatherRepository;
+  final WeatherRepository weatherRepository;
 
-  WeatherUseCase(this._weatherRepository);
+  WeatherUseCase(this.weatherRepository);
 
   @override
   Future<Either<Failure, WeatherResEntity>> call(
     WeatherReqModel weatherReqModel,
   ) {
-    return _weatherRepository.curentWeather(weatherReqModel);
+    return weatherRepository.curentWeather(weatherReqModel);
   }
 }
