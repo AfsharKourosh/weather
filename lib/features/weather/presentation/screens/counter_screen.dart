@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather/features/weather/presentation/bloc-cubit/cubit/counter_cubit.dart';
+import 'package:weather/features/weather/presentation/bloc-cubit/cubit/counter/counter_cubit.dart';
 
 class CounterScreen extends StatelessWidget {
   const CounterScreen({super.key});
