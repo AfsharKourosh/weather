@@ -1,9 +1,7 @@
 name: weather
 description: "A new Flutter project."
 
-
-publish_to: 'none' 
-
+publish_to: "none"
 
 version: 1.0.0+1
 
@@ -13,7 +11,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
 
   cupertino_icons: ^1.0.8
   dio: ^5.11.1
@@ -32,15 +29,12 @@ dev_dependencies:
 
   flutter_lints: ^6.0.0
 
-
 flutter:
-
+  default-flavor: development
   uses-material-design: true
 
-  
   # assets:
   #   - images/a_dot_burr.jpeg
-  
 
   # fonts:
   #   - family: Schyler
@@ -48,6 +42,3 @@ flutter:
   #       - asset: fonts/Schyler-Regular.ttf
   #         style: italic
   #         weight: 70
-  
-  
-  

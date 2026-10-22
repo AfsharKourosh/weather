@@ -7,20 +7,24 @@ class EnvironmentLoader {
     defaultValue: 'development',
   );
 
-  static const baseUrl = String.fromEnvironment('BASE_URL');
+  static const baseUrl = String.fromEnvironment(
+    'BASE_URL',
+    defaultValue: 'https://api.openweathermap.org',
+  );
 
   static EnvironmentConfig load() {
-    if (baseUrl.trim().isEmpty) {
-      throw StateError('BASE_URL must be provided.');
-    }
+    final resolvedBaseUrl = baseUrl.trim().isEmpty
+        ? 'https://api.openweathermap.org'
+        : baseUrl;
+
     return EnvironmentConfig(
-      environment: switch (environment) {
+      environment: switch (environment.trim().toLowerCase()) {
         'development' => AppEnvironment.development,
         'staging' => AppEnvironment.staging,
         'production' => AppEnvironment.production,
         _ => throw UnsupportedError('Unknown environment: $environment'),
       },
-      baseUrl: baseUrl,
+      baseUrl: resolvedBaseUrl,
     );
   }
 }
