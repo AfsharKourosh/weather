@@ -22,6 +22,7 @@ dependencies:
   logger: ^2.8.0
   bloc: ^9.2.1
   flutter_bloc: ^9.1.1
+  intl: ^0.20.3
 
 dev_dependencies:
   flutter_test:

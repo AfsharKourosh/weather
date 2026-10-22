@@ -7,11 +7,10 @@ class CurentWeatherScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: CustomAppBar(),
-      body: Container(
+    return Container(
         decoration: BoxDecoration(),
         
-        child: Center(child: Text('home'))),
+        child: Center(child: Text('home'))
 
       // BlocBuilder<WeatherBloc, WeatherState>(
       //   builder: (context, state) {
