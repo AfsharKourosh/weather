@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:weather/config/di/network_module.dart';
+import 'package:weather/config/di/storage_module.dart';
 import 'package:weather/config/environment/environment_config.dart';
 import 'package:weather/config/environment/environment_loader.dart';
 import 'package:weather/core/network/client/api_client.dart';
@@ -17,7 +18,7 @@ Future<void> initDependencies() async {
   sl.registerSingleton<EnvironmentConfig>(EnvironmentLoader.load());
 
   // Storage
-  // await setupStorageDependencies(sl);
+  await setupDatabaseDependencies(sl);
 
   // Network
 
