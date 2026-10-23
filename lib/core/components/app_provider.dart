@@ -30,38 +30,17 @@ class _AppProviderState extends State<AppProvider> {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
-
     final List<Widget> pages = [CurentWeatherScreen(), BookMarkScreen()];
-
-    final List<BottomNavigationBarItem> navigationBarItem = const [
-      BottomNavigationBarItem(
-        icon: Icon(Icons.home),
-        label: 'Home',
-        activeIcon: Icon(Icons.home_filled),
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.bookmark),
-        label: 'bookMark',
-        activeIcon: Icon(Icons.bookmark_add_outlined),
-      ),
-    ];
 
     return BlocProvider(
       create: (context) => PageNavCubit(),
       child: Builder(
         builder: (context) {
           return Scaffold(
-            appBar: CustomAppBar(),
-            bottomNavigationBar: FooterScreens(
-              pageController: _pageController,
-              navigationBarItem: navigationBarItem,
-            ),
+            // appBar: CustomAppBar(),
+            bottomNavigationBar: FooterScreens(pageController: _pageController),
             extendBody: true,
             body: Container(
-              height: height,
-              width: width,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: WeatherWidgets.getBackGroundImage(),

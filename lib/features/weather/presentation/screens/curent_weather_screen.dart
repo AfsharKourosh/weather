@@ -1,26 +1,66 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather/config/di/injection.dart';
 import 'package:weather/core/components/custom_loading.dart';
 import 'package:weather/features/weather/date/models/weather_req_model.dart';
 import 'package:weather/features/weather/domain/entitys/weather_res_entity.dart';
+import 'package:weather/features/weather/domain/use-cases/search_box_usecase.dart';
 import 'package:weather/features/weather/presentation/bloc-cubit/bloc/weather_bloc.dart';
 import 'package:weather/features/weather/presentation/bloc-cubit/bloc/weather_status.dart';
 import 'package:weather/features/weather/presentation/widgets/max_min_temp.dart';
+import 'package:weather/features/weather/presentation/widgets/search_box.dart';
 import 'package:weather/features/weather/presentation/widgets/weather_widgets.dart';
 
-class CurentWeatherScreen extends StatelessWidget {
+class CurentWeatherScreen extends StatefulWidget {
   const CurentWeatherScreen({super.key});
 
-  // final PageController pageController;
+  @override
+  State<CurentWeatherScreen> createState() => _CurentWeatherScreenState();
+}
+
+class _CurentWeatherScreenState extends State<CurentWeatherScreen> {
+  late TextEditingController _textEditingController;
+
+  late SearchBoxUsecase _searchBoxUsecase;
+
+  @override
+  void initState() {
+    super.initState();
+    _textEditingController = TextEditingController();
+    _searchBoxUsecase = sl<SearchBoxUsecase>();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+
+      context.read<WeatherBloc>().add(
+        GetCurentWeather(
+          WeatherReqModel(cityName: 'Tehran', measure: 'metric'),
+        ),
+      );
+    });
+  }
+
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    context.read<WeatherBloc>().add(
-      GetCurentWeather(WeatherReqModel(cityName: 'Tehran', measure: 'metric')),
-    );
     return SafeArea(
       child: Column(
         children: [
+          Row(
+            children: [
+              Expanded(
+                child: SearchBox(
+                  textEditingController: _textEditingController,
+                  searchBoxUsecase: _searchBoxUsecase,
+                ),
+              ),
+            ],
+          ),
+
           BlocBuilder<WeatherBloc, WeatherState>(
             builder: (context, state) {
               if (state.curentWeatherStatus is CurentWeatherLoading) {

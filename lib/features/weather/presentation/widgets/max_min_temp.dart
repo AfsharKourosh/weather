@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:weather/features/weather/domain/entitys/weather_res_entity.dart';
 
 class MaxMinTemp extends StatelessWidget {
-  const new({
+  const MaxMinTemp({
     super.key,
     required this.weatherResEntity,
   });
