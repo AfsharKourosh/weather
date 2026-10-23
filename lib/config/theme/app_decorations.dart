@@ -1,31 +1,31 @@
-/*
+
 import 'package:flutter/material.dart';
 
-class AppDecorations extends ThemeExtension<AppDecorations> {
-  final BoxDecoration cardDecoration;
+// class AppDecorations extends ThemeExtension<AppDecorations> {
+//   final BoxDecoration cardDecoration;
 
-  const AppDecorations({required this.cardDecoration});
+//   const AppDecorations({required this.cardDecoration});
 
-  @override
-  AppDecorations copyWith({BoxDecoration? cardDecoration}) {
-    return AppDecorations(
-      cardDecoration: cardDecoration ?? this.cardDecoration,
-    );
-  }
+//   @override
+//   AppDecorations copyWith({BoxDecoration? cardDecoration}) {
+//     return AppDecorations(
+//       cardDecoration: cardDecoration ?? this.cardDecoration,
+//     );
+//   }
 
-  @override
-  AppDecorations lerp(ThemeExtension<AppDecorations>? other, double t) {
-    if (other is! AppDecorations) return this;
-    return this;
-    // AppDecorations(
-    //   cardDecoration: BoxDecoration.lerp(
-    //     cardDecoration,
-    //     other.cardDecoration,
-    //     t,
-    //   )!,
-    // );
-  }
-}
+//   @override
+//   AppDecorations lerp(ThemeExtension<AppDecorations>? other, double t) {
+//     if (other is! AppDecorations) return this;
+//     return this;
+//     // AppDecorations(
+//     //   cardDecoration: BoxDecoration.lerp(
+//     //     cardDecoration,
+//     //     other.cardDecoration,
+//     //     t,
+//     //   )!,
+//     // );
+//   }
+// }
 
 
 
@@ -52,4 +52,3 @@ abstract final class AppDecorations2 {
     borderRadius: BorderRadius.circular(24),
   );
 }
-*/
