@@ -51,81 +51,79 @@ class _CurentWeatherScreenState extends State<CurentWeatherScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<WeatherBloc, WeatherState>(
-      listenWhen: (previous, current) =>
-          current.curentWeatherStatus is CurentWeatherCompleted,
-      listener: (context, state) {
-        _searchFocusNode.unfocus();
-      },
-      child: SafeArea(
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: SearchBox(
-                    focusNode: _searchFocusNode,
-                    textEditingController: _textEditingController,
-                    searchBoxUsecase: _searchBoxUsecase,
-                  ),
+    return SafeArea(
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: SearchBox(
+                  focusNode: _searchFocusNode,
+                  textEditingController: _textEditingController,
+                  searchBoxUsecase: _searchBoxUsecase,
                 ),
-              ],
-            ),
+              ),
+            ],
+          ),
 
-            BlocBuilder<WeatherBloc, WeatherState>(
-              builder: (context, state) {
-                if (state.curentWeatherStatus is CurentWeatherLoading) {
-                  return Expanded(child: CustomLoading());
-                }
+          BlocConsumer<WeatherBloc, WeatherState>(
+            listener: (context, state) {
+              if (state.curentWeatherStatus is CurentWeatherCompleted) {
+                FocusScope.of(context).unfocus();
+              }
+            },
+            builder: (context, state) {
+              if (state.curentWeatherStatus is CurentWeatherLoading) {
+                return Expanded(child: CustomLoading());
+              }
 
-                if (state.curentWeatherStatus is CurentWeatherCompleted) {
-                  final CurentWeatherCompleted curentWeatherCompleted =
-                      state.curentWeatherStatus as CurentWeatherCompleted;
-                  final WeatherResEntity weatherResEntity =
-                      curentWeatherCompleted.weatherResEntity;
+              if (state.curentWeatherStatus is CurentWeatherCompleted) {
+                final CurentWeatherCompleted curentWeatherCompleted =
+                    state.curentWeatherStatus as CurentWeatherCompleted;
+                final WeatherResEntity weatherResEntity =
+                    curentWeatherCompleted.weatherResEntity;
 
-                  return Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Column(
-                          spacing: 10,
-                          children: [
-                            Text(
-                              weatherResEntity.name!,
-                              style: Theme.of(context).textTheme.bodyLarge,
-                            ),
-                            Text(
-                              weatherResEntity.weather![0].description!,
-                              style: Theme.of(context).textTheme.bodyMedium,
-                            ),
-                            WeatherWidgets.setIconForMain(
-                              weatherResEntity.weather![0].description!,
-                            ),
-                            Text(
-                              '${weatherResEntity.main!.temp!.round()}\u00b0',
-                              style: Theme.of(context).textTheme.bodyLarge,
-                            ),
-                          ],
-                        ),
-                        MaxMinTemp(weatherResEntity: weatherResEntity),
-                      ],
-                    ),
-                  );
-                }
-                if (state.curentWeatherStatus is Error) {
-                  return Center(
-                    child: Text(
-                      'error',
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                  );
-                }
-                return const SizedBox.shrink();
-              },
-            ),
-          ],
-        ),
+                return Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Column(
+                        spacing: 10,
+                        children: [
+                          Text(
+                            weatherResEntity.name!,
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
+                          Text(
+                            weatherResEntity.weather![0].description!,
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                          WeatherWidgets.setIconForMain(
+                            weatherResEntity.weather![0].description!,
+                          ),
+                          Text(
+                            '${weatherResEntity.main!.temp!.round()}\u00b0',
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
+                        ],
+                      ),
+                      MaxMinTemp(weatherResEntity: weatherResEntity),
+                    ],
+                  ),
+                );
+              }
+              if (state.curentWeatherStatus is Error) {
+                return Center(
+                  child: Text(
+                    'error',
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                );
+              }
+              return const SizedBox.shrink();
+            },
+          ),
+        ],
       ),
     );
   }

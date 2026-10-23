@@ -11,12 +11,13 @@ class SearchBox extends StatelessWidget {
     super.key,
     required this._textEditingController,
     required this._searchBoxUsecase,
-    required this.focusNode,
+    required this._focusNode,
   });
 
   final TextEditingController _textEditingController;
   final SearchBoxUsecase _searchBoxUsecase;
-  final FocusNode focusNode;
+  final FocusNode _focusNode;
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -69,6 +70,7 @@ class SearchBox extends StatelessWidget {
 
       onSelected: (Datum model) {
         _textEditingController.text = model.name;
+        _focusNode.unfocus();
 
         context.read<WeatherBloc>().add(
           GetCurentWeather(
@@ -83,9 +85,21 @@ class SearchBox extends StatelessWidget {
         if (prefix.length < 2) {
           return <Datum>[];
         }
-        final result = await _searchBoxUsecase(search);
 
-        return result.fold((failure) => <Datum>[], (data) => data);
+        debugPrint('Searching cities: "$prefix"');
+
+        final result = await _searchBoxUsecase(prefix);
+
+        return result.fold(
+          (failure) {
+            debugPrint('Search failed: $failure');
+            return <Datum>[];
+          },
+          (data) {
+            debugPrint('Cities found: ${data.length}');
+            return data;
+          },
+        );
       },
     );
   }
