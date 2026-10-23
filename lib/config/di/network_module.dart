@@ -7,11 +7,12 @@ import 'package:weather/core/network/client/api_client.dart';
 import 'package:weather/core/network/client/dio_api_client.dart';
 import 'package:weather/core/network/connectivity/connectivity_service.dart';
 
-
 void setupNetworkDependencies(GetIt sl) {
   sl.registerLazySingleton<ConnectivityService>(
     () => ConnectivityServiceImpl(Connectivity()),
   );
+
+  ///weather
   sl.registerLazySingleton<Dio>(() {
     final environment = sl<EnvironmentConfig>();
     final dio = Dio(
@@ -21,7 +22,8 @@ void setupNetworkDependencies(GetIt sl) {
         receiveTimeout: const Duration(seconds: 15),
       ),
     );
-// Logger should be added after other interceptors.
+
+    // Logger should be added after other interceptors.
     dio.interceptors.addAll(
       [if (environment.isDevelopment) PrettyDioLogger()],
       // AuthInterceptor(
@@ -30,6 +32,29 @@ void setupNetworkDependencies(GetIt sl) {
     );
 
     return dio;
-  });
-  sl.registerLazySingleton<ApiClient>(() => DioApiClient(sl<Dio>()));
+  }, instanceName: 'weather');
+
+  ///searchBox
+  sl.registerLazySingleton<Dio>(() {
+    final environment = sl<EnvironmentConfig>();
+
+    final dio = Dio(
+      BaseOptions(
+        baseUrl: environment.secondaryBaseUrl,
+        connectTimeout: const Duration(seconds: 15),
+        receiveTimeout: const Duration(seconds: 15),
+      ),
+    );
+    return dio;
+  }, instanceName: 'searchBox');
+
+  sl.registerLazySingleton<ApiClient>(
+    () => DioApiClient(sl<Dio>(instanceName: 'weather')),
+    instanceName: 'weather',
+  );
+
+  sl.registerLazySingleton<ApiClient>(
+    () => DioApiClient(sl<Dio>(instanceName: 'searchBox')),
+    instanceName: 'searchBox',
+  );
 }

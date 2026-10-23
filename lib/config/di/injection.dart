@@ -6,6 +6,7 @@ import 'package:weather/core/network/client/api_client.dart';
 import 'package:weather/features/weather/date/data-sources/remote/weather_data_source.dart';
 import 'package:weather/features/weather/date/repositorys/weather_repository_impl.dart';
 import 'package:weather/features/weather/domain/repositorys/weather_repository.dart';
+import 'package:weather/features/weather/domain/use-cases/search_box_usecase.dart';
 import 'package:weather/features/weather/domain/use-cases/weather_usecase.dart';
 import 'package:weather/features/weather/presentation/bloc-cubit/bloc/weather_bloc.dart';
 
@@ -39,7 +40,10 @@ Future<void> initDependencies() async {
 void setupWeatherDependencies(GetIt sl) {
   // Data Source
   sl.registerLazySingleton<WeatherDataSource>(
-    () => WeatherDataSourceImpl(sl<ApiClient>()),
+    () => WeatherDataSourceImpl(
+      sl<ApiClient>(instanceName: 'weather'),
+      sl<ApiClient>(instanceName: 'searchBox'),
+    ),
   );
 
   // Repository
@@ -50,6 +54,10 @@ void setupWeatherDependencies(GetIt sl) {
   // Use Case
   sl.registerLazySingleton<WeatherUseCase>(
     () => WeatherUseCase(sl<WeatherRepository>()),
+  );
+
+  sl.registerLazySingleton<SearchBoxUsecase>(
+    () => SearchBoxUsecase(sl<WeatherRepository>()),
   );
 
   // bloc/cubit

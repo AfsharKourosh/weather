@@ -12,11 +12,18 @@ class EnvironmentLoader {
     defaultValue: 'https://api.openweathermap.org',
   );
 
+  static const secondaryBaseUrl = String.fromEnvironment(
+    'SECONDARY_BASE_URL',
+    defaultValue: 'http://geodb-free-service.wirefreethought.com',
+  );
+
   static EnvironmentConfig load() {
     final resolvedBaseUrl = baseUrl.trim().isEmpty
         ? 'https://api.openweathermap.org'
-        : baseUrl;
-
+        : baseUrl.trim();
+    final resolvedSecondaryBaseUrl = baseUrl.trim().isEmpty
+        ? 'http://geodb-free-service.wirefreethought.com'
+        : secondaryBaseUrl.trim();
     return EnvironmentConfig(
       environment: switch (environment.trim().toLowerCase()) {
         'development' => AppEnvironment.development,
@@ -25,6 +32,7 @@ class EnvironmentLoader {
         _ => throw UnsupportedError('Unknown environment: $environment'),
       },
       baseUrl: resolvedBaseUrl,
+      secondaryBaseUrl: resolvedSecondaryBaseUrl,
     );
   }
 }
