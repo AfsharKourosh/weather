@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:weather/config/theme/app_theme.dart';
 import 'package:weather/core/components/app_provider.dart';
 import 'package:weather/core/components/app_toast.dart';
 import 'package:weather/features/weather/presentation/screens/counter_screen.dart';
@@ -14,6 +15,7 @@ class WeatherApp extends StatelessWidget {
   Widget build(BuildContext context) {
     if (Platform.isAndroid) {
       return MaterialApp(
+        theme: AppTheme.light,
         scaffoldMessengerKey: AppToast.messengerKey,
         debugShowCheckedModeBanner: kDebugMode,
         home: AppProvider(),

@@ -14,26 +14,23 @@ class WeatherWidgets {
     }
   }
 
-  static Image setIconForMain(String description, double height) {
+  static Image setIconForMain(String description) {
     if (description == "clear sky") {
-      return Image(image: AssetImage('assets/images/sun.png'), height: height);
+      return Image(image: AssetImage('assets/images/sun.png'));
     } else if (description == "few clouds") {
-      return Image(
-        image: AssetImage('assets/images/partly-cloudy-day.png'),
-        height: height,
-      );
+      return Image(image: AssetImage('assets/images/partly-cloudy-day.png'));
     } else if (description.contains("clouds")) {
-      return Image(image: AssetImage('assets/images/clouds.png'), height: height);
+      return Image(image: AssetImage('assets/images/clouds.png'));
     } else if (description.contains("thunderstorm")) {
-      return Image(image: AssetImage('assets/images/storm.png'), height: height);
+      return Image(image: AssetImage('assets/images/storm.png'));
     } else if (description.contains("drizzle")) {
-      return Image(image: AssetImage('assets/images/rain-cloud.png'), height: height);
+      return Image(image: AssetImage('assets/images/rain-cloud.png'));
     } else if (description.contains("rain")) {
-      return Image(image: AssetImage('assets/images/heavy-rain.png'), height: height);
+      return Image(image: AssetImage('assets/images/heavy-rain.png'));
     } else if (description.contains("snow")) {
-      return Image(image: AssetImage('assets/images/snow.png'), height: height);
+      return Image(image: AssetImage('assets/images/snow.png'));
     } else {
-      return Image(image: AssetImage('assets/images/windy.png'), height: height);
+      return Image(image: AssetImage('assets/images/windy.png'));
     }
   }
 }
