@@ -5,6 +5,7 @@ import 'package:weather/core/error/exceptions/server_exception.dart';
 import 'package:weather/core/error/failures/failure.dart';
 import 'package:weather/features/weather/date/data-sources/remote/weather_data_source.dart';
 import 'package:weather/features/weather/date/models/weather_req_model.dart';
+import 'package:weather/features/weather/domain/entitys/search_box_res_entity.dart';
 import 'package:weather/features/weather/domain/entitys/weather_res_entity.dart';
 import 'package:weather/features/weather/domain/repositorys/weather_repository.dart';
 
@@ -12,12 +13,27 @@ class WeatherRepositoryImpl implements WeatherRepository {
   final WeatherDataSource weatherDataSource;
 
   WeatherRepositoryImpl(this.weatherDataSource);
+  
   @override
   Future<Either<Failure, WeatherResEntity>> curentWeather(
     WeatherReqModel weatherReqModel,
   ) async {
     try {
       final model = await weatherDataSource.curentWeather(weatherReqModel);
+      return Right(model.toEntity());
+    } on NetworkException catch (e) {
+      return Left(NetworkFailure(e.message));
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.message));
+    } on AppException catch (e) {
+      return Left(ServerFailure(e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, SearchBoxResEntity>> searchBox(String prefix) async {
+    try {
+      final model = await weatherDataSource.searchBox(prefix);
       return Right(model.toEntity());
     } on NetworkException catch (e) {
       return Left(NetworkFailure(e.message));
