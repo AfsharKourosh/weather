@@ -54,16 +54,19 @@ class _CurentWeatherScreenState extends State<CurentWeatherScreen> {
     return SafeArea(
       child: Column(
         children: [
-          Row(
-            children: [
-              Expanded(
-                child: SearchBox(
-                  focusNode: _searchFocusNode,
-                  textEditingController: _textEditingController,
-                  searchBoxUsecase: _searchBoxUsecase,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+            child: Row(
+              children: [
+                Expanded(
+                  child: SearchBox(
+                    focusNode: _searchFocusNode,
+                    textEditingController: _textEditingController,
+                    searchBoxUsecase: _searchBoxUsecase,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
 
           BlocConsumer<WeatherBloc, WeatherState>(
