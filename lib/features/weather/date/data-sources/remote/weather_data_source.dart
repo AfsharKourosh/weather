@@ -6,7 +6,7 @@ import 'package:weather/features/weather/date/models/weather_res_model.dart';
 
 abstract interface class WeatherDataSource {
   Future<WeatherResModel> curentWeather(WeatherReqModel weatherReqModel);
-  Future<SearchBoxResModel> searchBox(String prefix);
+  Future<List<Datum>> searchBox(String prefix);
 }
 
 class WeatherDataSourceImpl implements WeatherDataSource {
@@ -36,7 +36,7 @@ class WeatherDataSourceImpl implements WeatherDataSource {
   }
 
   @override
-  Future<SearchBoxResModel> searchBox(String prefix) async {
+  Future<List<Datum>> searchBox(String prefix) async {
     final response = await searchBoxApiClient.get<Map<String, dynamic>>(
       '/v1/geo/cities',
       queryParameters: {'limit': 7, 'offset': 0, 'namePrefix': prefix},
@@ -52,6 +52,6 @@ class WeatherDataSourceImpl implements WeatherDataSource {
 
     AppLogger.debug('Weather Response Model: $searchBoxModel');
 
-    return searchBoxModel;
+    return searchBoxModel.data ?? <Datum>[];
   }
 }

@@ -11,11 +11,12 @@ class SearchBox extends StatelessWidget {
     super.key,
     required this._textEditingController,
     required this._searchBoxUsecase,
+    required this.focusNode,
   });
 
   final TextEditingController _textEditingController;
   final SearchBoxUsecase _searchBoxUsecase;
-
+  final FocusNode focusNode;
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -58,7 +59,10 @@ class SearchBox extends StatelessWidget {
       itemBuilder: (context, Datum model) {
         return ListTile(
           leading: const Icon(Icons.location_on),
-          title: Text(model.name),
+          title: Text(
+            model.name,
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
           subtitle: Text("${model.region}, ${model.country}"),
         );
       },
@@ -74,12 +78,14 @@ class SearchBox extends StatelessWidget {
       },
 
       suggestionsCallback: (search) async {
+        final prefix = search.trim();
+
+        if (prefix.length < 2) {
+          return <Datum>[];
+        }
         final result = await _searchBoxUsecase(search);
 
-        return result.fold(
-          (failure) => <Datum>[],
-          (entity) => entity.data ?? <Datum>[],
-        );
+        return result.fold((failure) => <Datum>[], (data) => data);
       },
     );
   }
