@@ -7,9 +7,10 @@ import 'package:weather/features/weather/domain/entitys/weather_res_entity.dart'
 import 'package:weather/features/weather/domain/use-cases/search_box_usecase.dart';
 import 'package:weather/features/weather/presentation/bloc-cubit/bloc/weather_bloc.dart';
 import 'package:weather/features/weather/presentation/bloc-cubit/bloc/weather_status.dart';
+import 'package:weather/features/weather/presentation/widgets/info_weather.dart';
 import 'package:weather/features/weather/presentation/widgets/max_min_temp.dart';
 import 'package:weather/features/weather/presentation/widgets/search_box.dart';
-import 'package:weather/features/weather/presentation/widgets/weather_widgets.dart';
+import 'package:weather/features/weather/presentation/widgets/weather_cities.dart';
 
 class CurentWeatherScreen extends StatefulWidget {
   const CurentWeatherScreen({super.key});
@@ -83,6 +84,7 @@ class _CurentWeatherScreenState extends State<CurentWeatherScreen> {
               if (state.curentWeatherStatus is CurentWeatherCompleted) {
                 final CurentWeatherCompleted curentWeatherCompleted =
                     state.curentWeatherStatus as CurentWeatherCompleted;
+
                 final WeatherResEntity weatherResEntity =
                     curentWeatherCompleted.weatherResEntity;
 
@@ -90,27 +92,9 @@ class _CurentWeatherScreenState extends State<CurentWeatherScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Column(
-                        spacing: 10,
-                        children: [
-                          Text(
-                            weatherResEntity.name!,
-                            style: Theme.of(context).textTheme.bodyLarge,
-                          ),
-                          Text(
-                            weatherResEntity.weather![0].description!,
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                          WeatherWidgets.setIconForMain(
-                            weatherResEntity.weather![0].description!,
-                          ),
-                          Text(
-                            '${weatherResEntity.main!.temp!.round()}\u00b0',
-                            style: Theme.of(context).textTheme.bodyLarge,
-                          ),
-                        ],
-                      ),
+                      WeatherCities(weatherResEntity: weatherResEntity),
                       MaxMinTemp(weatherResEntity: weatherResEntity),
+                      InfoWeather(weatherResEntity: weatherResEntity),
                     ],
                   ),
                 );

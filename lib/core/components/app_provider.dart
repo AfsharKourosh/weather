@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather/core/components/custom_app_bar.dart';
 import 'package:weather/features/weather/presentation/bloc-cubit/cubit/page-nav/cubit/page_nav_cubit.dart';
-import 'package:weather/features/weather/presentation/screens/book_mark_screen.dart';
+import 'package:weather/features/bookmark/presentation/book_mark_screen.dart';
 import 'package:weather/features/weather/presentation/screens/curent_weather_screen.dart';
 import 'package:weather/features/weather/presentation/widgets/footer_screens.dart';
 import 'package:weather/features/weather/presentation/widgets/weather_widgets.dart';
