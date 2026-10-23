@@ -1,265 +1,265 @@
 import 'package:weather/features/weather/domain/entitys/weather_res_entity.dart';
 
 class WeatherResModel {
-  final CoordModel coord;
-  final List<WeatherModel> weather;
-  final String base;
-  final MainWeatherModel main;
-  final int visibility;
-  final WindModel wind;
-  final RainModel? rain;
-  final CloudsModel clouds;
-  final int dt;
-  final SysModel sys;
-  final int timezone;
-  final int id;
-  final String name;
-  final int cod;
-
-  const WeatherResModel({
-    required this.coord,
-    required this.weather,
-    required this.base,
-    required this.main,
-    required this.visibility,
-    required this.wind,
-    this.rain,
-    required this.clouds,
-    required this.dt,
-    required this.sys,
-    required this.timezone,
-    required this.id,
-    required this.name,
-    required this.cod,
+  WeatherResModel({
+    this.coord,
+    this.weather,
+    this.base,
+    this.main,
+    this.visibility,
+    this.wind,
+    this.clouds,
+    this.dt,
+    this.sys,
+    this.timezone,
+    this.id,
+    this.name,
+    this.cod,
   });
+  Coord? coord;
+  List<Weather>? weather;
+  String? base;
+  Main? main;
+  int? visibility;
+  Wind? wind;
+  Clouds? clouds;
+  int? dt;
+  Sys? sys;
+  int? timezone;
+  int? id;
+  String? name;
+  int? cod;
 
-  factory WeatherResModel.fromJson(Map<String, dynamic> json) {
+  factory WeatherResModel.fromJson(dynamic json) {
+    List<Weather> weather = [];
+    if (json['weather'] != null) {
+      json['weather'].forEach((v) {
+        weather.add(Weather.fromJson(v));
+      });
+    }
+
     return WeatherResModel(
-      coord: CoordModel.fromJson(json['coord']),
-      weather: (json['weather'] as List)
-          .map((e) => WeatherModel.fromJson(e))
-          .toList(),
+      coord: json['coord'] != null ? Coord.fromJson(json['coord']) : null,
+      weather: weather,
       base: json['base'],
-      main: MainWeatherModel.fromJson(json['main']),
+      main: json['main'] != null ? Main.fromJson(json['main']) : null,
       visibility: json['visibility'],
-      wind: WindModel.fromJson(json['wind']),
-      rain: json['rain'] != null ? RainModel.fromJson(json['rain']) : null,
-      clouds: CloudsModel.fromJson(json['clouds']),
+      wind: json['wind'] != null ? Wind.fromJson(json['wind']) : null,
+      clouds: json['clouds'] != null ? Clouds.fromJson(json['clouds']) : null,
       dt: json['dt'],
-      sys: SysModel.fromJson(json['sys']),
+      sys: json['sys'] != null ? Sys.fromJson(json['sys']) : null,
       timezone: json['timezone'],
       id: json['id'],
       name: json['name'],
-      cod: json['cod'] is int ? json['cod'] : int.parse(json['cod'].toString()),
+      cod: json['cod'],
     );
   }
-
   WeatherResEntity toEntity() {
-    final weatherData = weather.first;
-
     return WeatherResEntity(
-      lon: coord.lon,
-      lat: coord.lat,
-      description: weatherData.description,
-      weatherMain: weatherData.main,
-      icon: weatherData.icon,
-      temp: main.temp,
-      feelsLike: main.feelsLike,
-      tempMin: main.tempMin,
-      tempMax: main.tempMax,
-      pressure: main.pressure,
-      humidity: main.humidity,
+      coord: coord,
+      weather: weather,
+      base: base,
+      main: main,
       visibility: visibility,
-      windSpeed: wind.speed,
-      windDeg: wind.deg,
-      windGust: wind.gust,
-      rainOneHour: rain?.oneHour,
-      clouds: clouds.all,
-      dateTime: DateTime.fromMillisecondsSinceEpoch(dt * 1000, isUtc: true),
-      country: sys.country,
-      sunrise: DateTime.fromMillisecondsSinceEpoch(
-        sys.sunrise * 1000,
-        isUtc: true,
-      ),
-      sunset: DateTime.fromMillisecondsSinceEpoch(
-        sys.sunset * 1000,
-        isUtc: true,
-      ),
+      wind: wind,
+      clouds: clouds,
+      dt: dt,
+      sys: sys,
       timezone: timezone,
-      cityId: id,
-      cityName: name,
+      id: id,
+      name: name,
+      cod: cod,
     );
   }
 }
 
-class CoordModel {
-  final double lon;
-  final double lat;
-
-  const CoordModel({required this.lon, required this.lat});
-
-  factory CoordModel.fromJson(Map<String, dynamic> json) {
-    return CoordModel(
-      lon: (json['lon'] as num).toDouble(),
-      lat: (json['lat'] as num).toDouble(),
-    );
+class Sys {
+  Sys({int? type, int? id, String? country, int? sunrise, int? sunset}) {
+    _type = type;
+    _id = id;
+    _country = country;
+    _sunrise = sunrise;
+    _sunset = sunset;
   }
 
-  Map<String, dynamic> toJson() => {'lon': lon, 'lat': lat};
+  Sys.fromJson(dynamic json) {
+    _type = json['type'];
+    _id = json['id'];
+    _country = json['country'];
+    _sunrise = json['sunrise'];
+    _sunset = json['sunset'];
+  }
+  int? _type;
+  int? _id;
+  String? _country;
+  int? _sunrise;
+  int? _sunset;
+
+  int? get type => _type;
+  int? get id => _id;
+  String? get country => _country;
+  int? get sunrise => _sunrise;
+  int? get sunset => _sunset;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['type'] = _type;
+    map['id'] = _id;
+    map['country'] = _country;
+    map['sunrise'] = _sunrise;
+    map['sunset'] = _sunset;
+    return map;
+  }
 }
 
-class WeatherModel {
-  final int id;
-  final String main;
-  final String description;
-  final String icon;
-
-  const WeatherModel({
-    required this.id,
-    required this.main,
-    required this.description,
-    required this.icon,
-  });
-
-  factory WeatherModel.fromJson(Map<String, dynamic> json) {
-    return WeatherModel(
-      id: json['id'],
-      main: json['main'],
-      description: json['description'],
-      icon: json['icon'],
-    );
+class Clouds {
+  Clouds({int? all}) {
+    _all = all;
   }
 
-  Map<String, dynamic> toJson() => {
-    'id': id,
-    'main': main,
-    'description': description,
-    'icon': icon,
-  };
+  Clouds.fromJson(dynamic json) {
+    _all = json['all'];
+  }
+  int? _all;
+
+  int? get all => _all;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['all'] = _all;
+    return map;
+  }
 }
 
-class MainWeatherModel {
-  final double temp;
-  final double feelsLike;
-  final double tempMin;
-  final double tempMax;
-  final int pressure;
-  final int humidity;
-  final int? seaLevel;
-  final int? grndLevel;
-
-  const MainWeatherModel({
-    required this.temp,
-    required this.feelsLike,
-    required this.tempMin,
-    required this.tempMax,
-    required this.pressure,
-    required this.humidity,
-    this.seaLevel,
-    this.grndLevel,
-  });
-
-  factory MainWeatherModel.fromJson(Map<String, dynamic> json) {
-    return MainWeatherModel(
-      temp: (json['temp'] as num).toDouble(),
-      feelsLike: (json['feels_like'] as num).toDouble(),
-      tempMin: (json['temp_min'] as num).toDouble(),
-      tempMax: (json['temp_max'] as num).toDouble(),
-      pressure: json['pressure'],
-      humidity: json['humidity'],
-      seaLevel: json['sea_level'],
-      grndLevel: json['grnd_level'],
-    );
+class Wind {
+  Wind({double? speed, int? deg}) {
+    _speed = speed;
+    _deg = deg;
   }
 
-  Map<String, dynamic> toJson() => {
-    'temp': temp,
-    'feels_like': feelsLike,
-    'temp_min': tempMin,
-    'temp_max': tempMax,
-    'pressure': pressure,
-    'humidity': humidity,
-    if (seaLevel != null) 'sea_level': seaLevel,
-    if (grndLevel != null) 'grnd_level': grndLevel,
-  };
+  Wind.fromJson(dynamic json) {
+    _speed = json['speed'].toDouble();
+    _deg = json['deg'];
+  }
+  double? _speed;
+  int? _deg;
+
+  double? get speed => _speed;
+  int? get deg => _deg;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['speed'] = _speed;
+    map['deg'] = _deg;
+    return map;
+  }
 }
 
-class WindModel {
-  final double speed;
-  final int deg;
-  final double? gust;
-
-  const WindModel({required this.speed, required this.deg, this.gust});
-
-  factory WindModel.fromJson(Map<String, dynamic> json) {
-    return WindModel(
-      speed: (json['speed'] as num).toDouble(),
-      deg: json['deg'],
-      gust: (json['gust'] as num?)?.toDouble(),
-    );
+class Main {
+  Main({
+    double? temp,
+    double? feelsLike,
+    double? tempMin,
+    double? tempMax,
+    int? pressure,
+    int? humidity,
+  }) {
+    _temp = temp;
+    _feelsLike = feelsLike;
+    _tempMin = tempMin;
+    _tempMax = tempMax;
+    _pressure = pressure;
+    _humidity = humidity;
   }
 
-  Map<String, dynamic> toJson() => {
-    'speed': speed,
-    'deg': deg,
-    if (gust != null) 'gust': gust,
-  };
+  Main.fromJson(dynamic json) {
+    _temp = json['temp'].toDouble();
+    _feelsLike = json['feels_like'].toDouble();
+    _tempMin = json['temp_min'].toDouble();
+    _tempMax = json['temp_max'].toDouble();
+    _pressure = json['pressure'];
+    _humidity = json['humidity'];
+  }
+  double? _temp;
+  double? _feelsLike;
+  double? _tempMin;
+  double? _tempMax;
+  int? _pressure;
+  int? _humidity;
+
+  double? get temp => _temp;
+  double? get feelsLike => _feelsLike;
+  double? get tempMin => _tempMin;
+  double? get tempMax => _tempMax;
+  int? get pressure => _pressure;
+  int? get humidity => _humidity;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['temp'] = _temp;
+    map['feels_like'] = _feelsLike;
+    map['temp_min'] = _tempMin;
+    map['temp_max'] = _tempMax;
+    map['pressure'] = _pressure;
+    map['humidity'] = _humidity;
+    return map;
+  }
 }
 
-class RainModel {
-  final double? oneHour;
-
-  const RainModel({this.oneHour});
-
-  factory RainModel.fromJson(Map<String, dynamic> json) {
-    return RainModel(oneHour: (json['1h'] as num?)?.toDouble());
+class Weather {
+  Weather({int? id, String? main, String? description, String? icon}) {
+    _id = id;
+    _main = main;
+    _description = description;
+    _icon = icon;
   }
 
-  Map<String, dynamic> toJson() => {if (oneHour != null) '1h': oneHour};
+  Weather.fromJson(dynamic json) {
+    _id = json['id'];
+    _main = json['main'];
+    _description = json['description'];
+    _icon = json['icon'];
+  }
+  int? _id;
+  String? _main;
+  String? _description;
+  String? _icon;
+
+  int? get id => _id;
+  String? get main => _main;
+  String? get description => _description;
+  String? get icon => _icon;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['id'] = _id;
+    map['main'] = _main;
+    map['description'] = _description;
+    map['icon'] = _icon;
+    return map;
+  }
 }
 
-class CloudsModel {
-  final int all;
-
-  const CloudsModel({required this.all});
-
-  factory CloudsModel.fromJson(Map<String, dynamic> json) {
-    return CloudsModel(all: json['all']);
+class Coord {
+  Coord({double? lon, double? lat}) {
+    _lon = lon;
+    _lat = lat;
   }
 
-  Map<String, dynamic> toJson() => {'all': all};
-}
-
-class SysModel {
-  final int? type;
-  final int? id;
-  final String country;
-  final int sunrise;
-  final int sunset;
-
-  const SysModel({
-    this.type,
-    this.id,
-    required this.country,
-    required this.sunrise,
-    required this.sunset,
-  });
-
-  factory SysModel.fromJson(Map<String, dynamic> json) {
-    return SysModel(
-      type: json['type'],
-      id: json['id'],
-      country: json['country'],
-      sunrise: json['sunrise'],
-      sunset: json['sunset'],
-    );
+  Coord.fromJson(dynamic json) {
+    _lon = json['lon'].toDouble();
+    _lat = json['lat'].toDouble();
   }
+  double? _lon;
+  double? _lat;
 
-  Map<String, dynamic> toJson() => {
-    if (type != null) 'type': type,
-    if (id != null) 'id': id,
-    'country': country,
-    'sunrise': sunrise,
-    'sunset': sunset,
-  };
+  double? get lon => _lon;
+  double? get lat => _lat;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['lon'] = _lon;
+    map['lat'] = _lat;
+    return map;
+  }
 }

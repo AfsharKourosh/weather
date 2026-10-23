@@ -1,53 +1,33 @@
+import 'package:weather/features/weather/date/models/weather_res_model.dart';
+
 class WeatherResEntity {
-  final double lon;
-  final double lat;
-  final String description;
-  final String weatherMain;
-  final String icon;
-  final double temp;
-  final double feelsLike;
-  final double tempMin;
-  final double tempMax;
-  final int pressure;
-  final int humidity;
-  final int visibility;
-  final double windSpeed;
-  final int windDeg;
-  final double? windGust;
-  final double? rainOneHour;
-  final int clouds;
-  final DateTime dateTime;
-  final String country;
-  final DateTime sunrise;
-  final DateTime sunset;
-  final int timezone;
-  final int cityId;
-  final String cityName;
+  final Coord? coord;
+  final List<Weather>? weather;
+  final String? base;
+  final Main? main;
+  final int? visibility;
+  final Wind? wind;
+  final Clouds? clouds;
+  final int? dt;
+  final Sys? sys;
+  final int? timezone;
+  final int? id;
+  final String? name;
+  final int? cod;
 
   const WeatherResEntity({
-    required this.lon,
-    required this.lat,
-    required this.description,
-    required this.weatherMain,
-    required this.icon,
-    required this.temp,
-    required this.feelsLike,
-    required this.tempMin,
-    required this.tempMax,
-    required this.pressure,
-    required this.humidity,
-    required this.visibility,
-    required this.windSpeed,
-    required this.windDeg,
-    this.windGust,
-    this.rainOneHour,
-    required this.clouds,
-    required this.dateTime,
-    required this.country,
-    required this.sunrise,
-    required this.sunset,
-    required this.timezone,
-    required this.cityId,
-    required this.cityName,
+    this.coord,
+    this.weather,
+    this.base,
+    this.main,
+    this.visibility,
+    this.wind,
+    this.clouds,
+    this.dt,
+    this.sys,
+    this.timezone,
+    this.id,
+    this.name,
+    this.cod,
   });
 }
