@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather/features/weather/domain/entitys/weather_res_entity.dart';
+import 'package:weather/features/weather/domain/entity/weather_res_entity.dart';
 
 class MaxMinTemp extends StatelessWidget {
   const MaxMinTemp({

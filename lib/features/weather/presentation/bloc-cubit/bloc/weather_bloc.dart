@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:weather/features/weather/date/models/weather_req_model.dart';
-import 'package:weather/features/weather/domain/use-cases/weather_usecase.dart';
+import 'package:weather/features/weather/date/model/weather_req_model.dart';
+import 'package:weather/features/weather/domain/use-case/weather_usecase.dart';
 import 'package:weather/features/weather/presentation/bloc-cubit/bloc/weather_status.dart';
 
 part 'weather_event.dart';

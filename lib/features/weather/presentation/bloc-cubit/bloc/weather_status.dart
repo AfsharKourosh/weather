@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:weather/features/weather/domain/entitys/weather_res_entity.dart';
+import 'package:weather/features/weather/domain/entity/weather_res_entity.dart';
 
 sealed class CurentWeatherStatus extends Equatable {
   @override

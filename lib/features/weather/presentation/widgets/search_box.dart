@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
-import 'package:weather/features/weather/date/models/search_box_res_model.dart';
-import 'package:weather/features/weather/date/models/weather_req_model.dart';
-import 'package:weather/features/weather/domain/use-cases/search_box_usecase.dart';
+import 'package:weather/features/weather/date/model/search_box_res_model.dart';
+import 'package:weather/features/weather/date/model/weather_req_model.dart';
+import 'package:weather/features/weather/domain/use-case/search_box_usecase.dart';
 import 'package:weather/features/weather/presentation/bloc-cubit/bloc/weather_bloc.dart';
 
 class SearchBox extends StatelessWidget {

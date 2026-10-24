@@ -4,11 +4,11 @@ import 'package:weather/config/di/storage_module.dart';
 import 'package:weather/config/environment/environment_config.dart';
 import 'package:weather/config/environment/environment_loader.dart';
 import 'package:weather/core/network/client/api_client.dart';
-import 'package:weather/features/weather/date/data-sources/remote/weather_data_source.dart';
-import 'package:weather/features/weather/date/repositorys/weather_repository_impl.dart';
-import 'package:weather/features/weather/domain/repositorys/weather_repository.dart';
-import 'package:weather/features/weather/domain/use-cases/search_box_usecase.dart';
-import 'package:weather/features/weather/domain/use-cases/weather_usecase.dart';
+import 'package:weather/features/weather/date/data-source/remote/weather_data_source.dart';
+import 'package:weather/features/weather/date/repository/weather_repository_impl.dart';
+import 'package:weather/features/weather/domain/repository/weather_repository.dart';
+import 'package:weather/features/weather/domain/use-case/search_box_usecase.dart';
+import 'package:weather/features/weather/domain/use-case/weather_usecase.dart';
 import 'package:weather/features/weather/presentation/bloc-cubit/bloc/weather_bloc.dart';
 
 final sl = GetIt.instance;
