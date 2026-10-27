@@ -12,7 +12,7 @@ class BookmarkRepositoryImpl implements BookmarkRepository {
   BookmarkRepositoryImpl(this.bookmarkDao);
 
   @override
-  Future<Either<Failure, BookmarkEntity?>> saveBookmarkEntityToDB(
+  Future<Either<Failure, BookmarkEntity>> saveBookmarkEntityToDB(
     String cityName,
   ) {
     return executeWithFailure(() async {
@@ -32,25 +32,24 @@ class BookmarkRepositoryImpl implements BookmarkRepository {
     });
   }
 
-  /// call get All city from DB and set status
   @override
   Future<Either<Failure, List<BookmarkEntity>>>
-  getAllBookmarkEntityFromDB() async {
-    return executeWithFailure(() => bookmarkDao.getAllBookmarkEntity());
+  getAllBookmarkEntityFromDB()  {
+    return executeWithFailure(()async =>await bookmarkDao.getAllBookmarkEntity());
   }
 
-  /// call  get city by name from DB and set status
   @override
   Future<Either<Failure, BookmarkEntity?>> findBookmarkEntityByName(
     String name,
-  ) async {
-    return executeWithFailure(() => bookmarkDao.findBookmarkEntityByName(name));
+  )  {
+    return executeWithFailure(() async =>await bookmarkDao.findBookmarkEntityByName(name));
   }
 
   @override
-  Future<Either<Failure, void>> deleteBookmarkEntityByName(String name) async {
-    return executeWithFailure(
-      () => bookmarkDao.deleteBookmarkEntityByName(name),
-    );
+  Future<Either<Failure, String>> deleteBookmarkEntityByName(String name) {
+    return executeWithFailure(() async {
+      await bookmarkDao.deleteBookmarkEntityByName(name);
+      return name;
+    });
   }
 }

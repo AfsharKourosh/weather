@@ -3,7 +3,7 @@ import 'package:weather/core/error/failures/failure.dart';
 import 'package:weather/features/bookmark/domain/entity/bookmark_entity.dart';
 
 abstract interface class BookmarkRepository {
-  Future<Either<Failure, BookmarkEntity?>> saveBookmarkEntityToDB(
+  Future<Either<Failure, BookmarkEntity>> saveBookmarkEntityToDB(
     String cityName,
   );
 
@@ -13,5 +13,5 @@ abstract interface class BookmarkRepository {
     String name,
   );
 
-  Future<Either<Failure, void>> deleteBookmarkEntityByName(String name);
+  Future<Either<Failure, String>> deleteBookmarkEntityByName(String name);
 }
