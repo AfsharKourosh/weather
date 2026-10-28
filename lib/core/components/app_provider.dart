@@ -29,7 +29,10 @@ class _AppProviderState extends State<AppProvider> {
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> pages = [CurentWeatherScreen(), BookMarkScreen()];
+    final List<Widget> pages = [
+      CurentWeatherScreen(),
+      BookMarkScreen(pageController: _pageController),
+    ];
 
     return BlocProvider(
       // BlocProvider<PageNavCubit>(create: (_) => sl<PageNavCubit>()),
