@@ -13,7 +13,14 @@ Future<Either<Failure, T>> executeWithFailure<T>(
     return Left(NetworkFailure(e.message));
   } on ServerException catch (e) {
     return Left(ServerFailure(e.message));
+  } on FormatException {
+    return const Left(
+      DataParsingFailure('Invalid response format'),
+    );
   } on AppException catch (e) {
     return Left(ServerFailure(e.message));
   }
+}
+class DataParsingFailure extends Failure {
+  const DataParsingFailure(super.message);
 }
