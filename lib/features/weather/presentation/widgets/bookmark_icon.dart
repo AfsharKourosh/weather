@@ -33,6 +33,10 @@ class _BookMarkIconState extends State<BookMarkIcon> {
       bloc.add(GetBookmarkByNameEvent(widget.name));
     }
   }
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {

@@ -4,7 +4,6 @@ import 'package:weather/config/di/injection.dart';
 import 'package:weather/core/components/custom_loading.dart';
 import 'package:weather/features/bookmark/presentation/bloc-cubit/bloc/bookmark_bloc.dart';
 import 'package:weather/features/weather/date/model/weather_req_model.dart';
-import 'package:weather/features/weather/domain/entity/weather_res_entity.dart';
 import 'package:weather/features/weather/domain/use-case/search_box_usecase.dart';
 import 'package:weather/features/weather/presentation/bloc-cubit/bloc/weather_bloc.dart';
 import 'package:weather/features/weather/presentation/bloc-cubit/bloc/weather_status.dart';
@@ -21,7 +20,8 @@ class CurentWeatherScreen extends StatefulWidget {
   State<CurentWeatherScreen> createState() => _CurentWeatherScreenState();
 }
 
-class _CurentWeatherScreenState extends State<CurentWeatherScreen> {
+class _CurentWeatherScreenState extends State<CurentWeatherScreen>
+    with AutomaticKeepAliveClientMixin {
   late TextEditingController _textEditingController;
 
   late SearchBoxUsecase _searchBoxUsecase;
@@ -54,6 +54,7 @@ class _CurentWeatherScreenState extends State<CurentWeatherScreen> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return SafeArea(
       child: Column(
         children: [
@@ -156,4 +157,7 @@ class _CurentWeatherScreenState extends State<CurentWeatherScreen> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
