@@ -5,11 +5,10 @@ import 'package:weather/core/error/exceptions/server_exception.dart';
 abstract final class ExceptionMapper {
   static Exception map(DioException exception) {
     final response = exception.response;
+    final statusCode = response?.statusCode;
 
-    if (response != null) {
-      final statusCode = response.statusCode;
-
-      if (statusCode != null && statusCode >= 500) {
+    if (response != null && statusCode != null) {
+      if (statusCode >= 500) {
         return ServerException(
           _extractMessage(response),
           statusCode: statusCode,
@@ -28,7 +27,7 @@ abstract final class ExceptionMapper {
         return ServerException('Resource not found', statusCode: statusCode);
       }
 
-      if (statusCode! >= 400) {
+      if (statusCode >= 400) {
         return ServerException(
           _extractMessage(response),
           statusCode: statusCode,
