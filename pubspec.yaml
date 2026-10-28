@@ -37,7 +37,7 @@ dev_dependencies:
   flutter_lints: ^6.0.0
   floor_generator: ^1.5.0
   build_runner: ^2.4.13
-  lints: ^2.14.0
+  # lints: ^2.14.0
 
 flutter:
   default-flavor: development
