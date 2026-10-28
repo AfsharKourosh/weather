@@ -5,7 +5,8 @@ import 'package:weather/features/weather/date/model/weather_req_model.dart';
 import 'package:weather/features/weather/domain/entity/weather_res_entity.dart';
 import 'package:weather/features/weather/domain/repository/weather_repository.dart';
 
-///class WeatherUseCase implements UseCase<Res, Req>
+// ignore: unintended_html_in_doc_comment
+///class WeatherUseCase implements UseCase<Res,Req>{}
 class WeatherUseCase implements UseCase<WeatherResEntity, WeatherReqModel> {
   final WeatherRepository weatherRepository;
 

@@ -74,15 +74,13 @@ class Datum {
 }
 
 class Metadata {
-  final int currentOffset;
-  final int totalCount;
-
   Metadata({required this.currentOffset, required this.totalCount});
-
   factory Metadata.fromJson(Map<String, dynamic> json) => Metadata(
     currentOffset: json["currentOffset"],
     totalCount: json["totalCount"],
   );
+  final int currentOffset;
+  final int totalCount;
 
   Map<String, dynamic> toJson() => {
     "currentOffset": currentOffset,
