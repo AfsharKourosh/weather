@@ -19,21 +19,19 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
   final GetBookmarkUseCase _getBookmarkUseCase;
   final SaveBookmarkUseCase _saveBookmarkUseCase;
 
-  BookmarkBloc(
-    this._deleteBookmarkUseCase,
-    this._getAllBookmarkUseCase,
-    this._getBookmarkUseCase,
-    this._saveBookmarkUseCase,
-  ) : super(
-        BookmarkState(
-          deleteBookmarkStatus: DeleteBookmarkInitial(),
-          getBookmarkStatus: GetBookmarkLoading(),
-          getAllBookmarkStatus: GetAllBookmarkLoading(),
-          saveBookmarkStatus: SaveBookmarkInitial(),
-        ),
-      ) {
-
-        
+  BookmarkBloc({
+    required this._deleteBookmarkUseCase,
+    required this._getAllBookmarkUseCase,
+    required this._getBookmarkUseCase,
+    required this._saveBookmarkUseCase,
+  }) : super(
+         BookmarkState(
+           deleteBookmarkStatus: DeleteBookmarkInitial(),
+           getBookmarkStatus: GetBookmarkLoading(),
+           getAllBookmarkStatus: GetAllBookmarkLoading(),
+           saveBookmarkStatus: SaveBookmarkInitial(),
+         ),
+       ) {
     on<DeleteBookmarkEvent>((event, emit) async {
       emit(state.copyWith(deleteBookmarkStatus: DeleteBookmarkLoading()));
 
@@ -47,13 +45,46 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
             ),
           );
         },
-        (name) {
+        (deletedName) {
+          final currentStatus = state.getBookmarkStatus;
+
+          final updatedGetStatus = switch (currentStatus) {
+            GetBookmarkCompleted(:final bookmarkEntity)
+                when bookmarkEntity?.name == event.name =>
+              GetBookmarkCompleted(null),
+            _ => currentStatus,
+          };
+
           emit(
-            state.copyWith(deleteBookmarkStatus: DeleteBookmarkCompleted(name)),
+            state.copyWith(
+              deleteBookmarkStatus: DeleteBookmarkCompleted(deletedName),
+              getBookmarkStatus: updatedGetStatus,
+            ),
           );
         },
       );
     });
+
+    // on<DeleteBookmarkEvent>((event, emit) async {
+    //   emit(state.copyWith(deleteBookmarkStatus: DeleteBookmarkLoading()));
+
+    //   final result = await _deleteBookmarkUseCase(event.name);
+
+    //   result.fold(
+    //     (failure) {
+    //       emit(
+    //         state.copyWith(
+    //           deleteBookmarkStatus: DeleteBookmarkError(failure.message),
+    //         ),
+    //       );
+    //     },
+    //     (name) {
+    //       emit(
+    //         state.copyWith(deleteBookmarkStatus: DeleteBookmarkCompleted(name)),
+    //       );
+    //     },
+    //   );
+    // });
 
     on<GetAllBookmarkEvent>((event, emit) async {
       emit(state.copyWith(getAllBookmarkStatus: GetAllBookmarkLoading()));
@@ -110,13 +141,39 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
             ),
           );
         },
-        (name) {
+        (bookmark) {
+          final savedBookmark = bookmark!;
+
           emit(
-            state.copyWith(saveBookmarkStatus: SaveBookmarkCompleted(name!)),
+            state.copyWith(
+              saveBookmarkStatus: SaveBookmarkCompleted(savedBookmark),
+              getBookmarkStatus: GetBookmarkCompleted(savedBookmark),
+            ),
           );
         },
       );
     });
+
+    // on<SaveCwEvent>((event, emit) async {
+    //   emit(state.copyWith(saveBookmarkStatus: SaveBookmarkLoading()));
+
+    //   final result = await _saveBookmarkUseCase(event.name);
+
+    //   result.fold(
+    //     (failure) {
+    //       emit(
+    //         state.copyWith(
+    //           saveBookmarkStatus: SaveBookmarkError(failure.message),
+    //         ),
+    //       );
+    //     },
+    //     (name) {
+    //       emit(
+    //         state.copyWith(saveBookmarkStatus: SaveBookmarkCompleted(name!)),
+    //       );
+    //     },
+    //   );
+    // });
 
     on<SaveBookmarkInitialEvent>((event, emit) async {
       emit(state.copyWith(saveBookmarkStatus: SaveBookmarkInitial()));

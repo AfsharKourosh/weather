@@ -32,7 +32,8 @@ class _AppProviderState extends State<AppProvider> {
     final List<Widget> pages = [CurentWeatherScreen(), BookMarkScreen()];
 
     return BlocProvider(
-      create: (context) => PageNavCubit(),
+      // BlocProvider<PageNavCubit>(create: (_) => sl<PageNavCubit>()),
+      create: (_) => PageNavCubit(),
       child: Builder(
         builder: (context) {
           return Scaffold(

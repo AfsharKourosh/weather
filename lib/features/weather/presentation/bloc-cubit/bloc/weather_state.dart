@@ -1,12 +1,11 @@
 part of 'weather_bloc.dart';
 
 class WeatherState {
-  CurentWeatherStatus curentWeatherStatus;
-  WeatherState({required this.curentWeatherStatus});
+  WeatherState(this.weatherStatus);
 
-  WeatherState copyWith({CurentWeatherStatus? curentWeatherStatus}) {
-    return WeatherState(
-      curentWeatherStatus: curentWeatherStatus ?? this.curentWeatherStatus,
-    );
+  final WeatherStatus weatherStatus;
+
+  WeatherState copyWith(WeatherStatus? weatherStatus) {
+    return WeatherState(weatherStatus ?? this.weatherStatus);
   }
 }

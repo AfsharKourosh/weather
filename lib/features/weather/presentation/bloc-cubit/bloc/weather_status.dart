@@ -1,24 +1,24 @@
 import 'package:equatable/equatable.dart';
 import 'package:weather/features/weather/domain/entity/weather_res_entity.dart';
 
-sealed class CurentWeatherStatus extends Equatable {
+sealed class WeatherStatus extends Equatable {
   @override
   List<Object?> get props => [];
 }
 
-final class CurentWeatherLoading extends CurentWeatherStatus {}
+final class WeatherLoading extends WeatherStatus {}
 
-final class CurentWeatherCompleted extends CurentWeatherStatus {
+final class WeatherCompleted extends WeatherStatus {
   final WeatherResEntity weatherResEntity;
-  CurentWeatherCompleted(this.weatherResEntity);
+  WeatherCompleted(this.weatherResEntity);
 
   @override
   List<Object?> get props => [weatherResEntity];
 }
 
-final class CurentWeatherError extends CurentWeatherStatus {
+final class WeatherError extends WeatherStatus {
   final String? message;
-  CurentWeatherError(this.message);
+  WeatherError(this.message);
   @override
   List<Object?> get props => [message];
 }
