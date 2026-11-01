@@ -65,27 +65,6 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
       );
     });
 
-    // on<DeleteBookmarkEvent>((event, emit) async {
-    //   emit(state.copyWith(deleteBookmarkStatus: DeleteBookmarkLoading()));
-
-    //   final result = await _deleteBookmarkUseCase(event.name);
-
-    //   result.fold(
-    //     (failure) {
-    //       emit(
-    //         state.copyWith(
-    //           deleteBookmarkStatus: DeleteBookmarkError(failure.message),
-    //         ),
-    //       );
-    //     },
-    //     (name) {
-    //       emit(
-    //         state.copyWith(deleteBookmarkStatus: DeleteBookmarkCompleted(name)),
-    //       );
-    //     },
-    //   );
-    // });
-
     on<GetAllBookmarkEvent>((event, emit) async {
       emit(state.copyWith(getAllBookmarkStatus: GetAllBookmarkLoading()));
 
@@ -153,27 +132,6 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
         },
       );
     });
-
-    // on<SaveCwEvent>((event, emit) async {
-    //   emit(state.copyWith(saveBookmarkStatus: SaveBookmarkLoading()));
-
-    //   final result = await _saveBookmarkUseCase(event.name);
-
-    //   result.fold(
-    //     (failure) {
-    //       emit(
-    //         state.copyWith(
-    //           saveBookmarkStatus: SaveBookmarkError(failure.message),
-    //         ),
-    //       );
-    //     },
-    //     (name) {
-    //       emit(
-    //         state.copyWith(saveBookmarkStatus: SaveBookmarkCompleted(name!)),
-    //       );
-    //     },
-    //   );
-    // });
 
     on<SaveBookmarkInitialEvent>((event, emit) async {
       emit(state.copyWith(saveBookmarkStatus: SaveBookmarkInitial()));
