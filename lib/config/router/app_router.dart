@@ -1,71 +1,26 @@
-
 import 'package:go_router/go_router.dart';
+import 'package:weather/core/components/app_provider.dart';
+import 'package:weather/features/bookmark/presentation/screen/book_mark_screen.dart';
+import 'package:weather/features/splash/presentation/screen/splash_screen.dart';
+import 'package:weather/features/weather/presentation/screens/curent_weather_screen.dart';
 
 import 'app_routes.dart';
 
 final GoRouter appRouter = GoRouter(
-  initialLocation: AppRoutes.home,
+  initialLocation: AppRoutes.splash,
+  debugLogDiagnostics: true,
+
   routes: [
     GoRoute(
-      path: AppRoutes.home,
-      name: RouteNames.home,
-      builder: (context, state) {
-        return const HomePage();
-      },
+      path: AppRoutes.splash,
+      // name: RouteNames.home,
+      builder: (context, state) => const SplashScreen(),
     ),
-        GoRoute(
-      path: AppRoutes.login,
-      name: RouteNames.login,
-      builder: (context, state) {
-        return const LoginPage();
-      },
+    GoRoute(
+      path: AppRoutes.appProvider,
+      // name: RouteNames.login,
+      builder: (context, state) => const AppProvider(),
     ),
-  ],
-    errorBuilder: (context, state) {
-    return const NotFoundPage();
-  },
-);
 
-
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: appRouter,
-    );
-  }
-}
-
-
-
-
-
-
-
-
-app_routes.dart
-    → path constants
-
-route_names.dart
-    → route name constants
-
-app_router.dart
-    → GoRouter configuration
-
-MaterialApp.router
-    → مصرف‌کننده GoRouter
-    ---------------------------------
-    when routes in features
-
-
-    
-    final GoRouter appRouter = GoRouter(
-  routes: [
-    ...authRoutes,
-    ...homeRoutes,
-    ...profileRoutes,
   ],
 );
