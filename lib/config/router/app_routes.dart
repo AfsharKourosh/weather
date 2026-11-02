@@ -1,4 +1,4 @@
-/*
+
 
 abstract final class AppRoutes {
   AppRoutes._();
@@ -13,4 +13,3 @@ abstract final class AppRoutes {
 config = تنظیمات و composition مخصوص خود App
 core   = قابلیت‌های reusable و مستقل از business
 feature = business/domain مربوط به یک feature
-*/

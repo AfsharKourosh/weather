@@ -1,4 +1,4 @@
-/*
+
 import 'package:go_router/go_router.dart';
 
 import 'app_routes.dart';
@@ -25,7 +25,9 @@ final GoRouter appRouter = GoRouter(
     return const NotFoundPage();
   },
 );
----------------------------------------------------
+
+
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -36,7 +38,14 @@ class MyApp extends StatelessWidget {
     );
   }
 }
--------------------------------------------------------
+
+
+
+
+
+
+
+
 app_routes.dart
     → path constants
 
@@ -60,4 +69,3 @@ MaterialApp.router
     ...profileRoutes,
   ],
 );
-*/
