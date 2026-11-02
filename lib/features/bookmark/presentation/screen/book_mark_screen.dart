@@ -9,9 +9,9 @@ import 'package:weather/features/weather/date/model/weather_req_model.dart';
 import 'package:weather/features/weather/presentation/bloc-cubit/bloc/weather_bloc.dart';
 
 class BookMarkScreen extends StatefulWidget {
-  const BookMarkScreen({super.key, required this.pageController});
+  const BookMarkScreen({super.key, this.pageController});
 
-  final PageController pageController;
+  final PageController? pageController;
 
   @override
   State<BookMarkScreen> createState() => _BookMarkScreenState();
@@ -126,7 +126,7 @@ class _BookMarkScreenState extends State<BookMarkScreen> {
                                             ),
                                           );
 
-                                          widget.pageController.animateToPage(
+                                          widget.pageController!.animateToPage(
                                             0,
                                             duration: const Duration(
                                               milliseconds: 300,
