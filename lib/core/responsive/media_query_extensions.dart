@@ -1,10 +1,3 @@
-/*
-core/
-└── responsive/
-    ├── media_query_extensions.dart
-    ├── responsive.dart
-    └── font_responsive.dart
-    -------------------------------
 import 'package:flutter/material.dart';
 
 extension MediaQueryExtensions on BuildContext {
@@ -14,5 +7,3 @@ extension MediaQueryExtensions on BuildContext {
 
   double get screenHeight => screenSize.height;
 }
- 
-*/

@@ -1,4 +1,4 @@
-/*
+
 enum DeviceType {
   mobile,
   tablet,
@@ -17,4 +17,3 @@ abstract final class Responsive {
     return DeviceType.desktop;
   }
 }
-*/
