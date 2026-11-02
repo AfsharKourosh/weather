@@ -5,8 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather/config/di/injection.dart';
+import 'package:weather/config/router/app_router.dart';
 import 'package:weather/config/theme/app_theme.dart';
-import 'package:weather/core/components/app_provider.dart';
 import 'package:weather/core/components/app_toast.dart';
 import 'package:weather/features/bookmark/presentation/bloc-cubit/bloc/bookmark_bloc.dart';
 import 'package:weather/features/weather/presentation/bloc-cubit/bloc/weather_bloc.dart';
@@ -18,16 +18,16 @@ class WeatherApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (Platform.isAndroid) {
-      return MaterialApp(
-        theme: AppTheme.light,
-        scaffoldMessengerKey: AppToast.messengerKey,
-        debugShowCheckedModeBanner: kDebugMode,
-        home: MultiBlocProvider(
-          providers: [
-            BlocProvider<WeatherBloc>(create: (_) => sl<WeatherBloc>()),
-            BlocProvider<BookmarkBloc>(create: (_) => sl<BookmarkBloc>()),
-          ],
-          child: AppProvider(),
+      return MultiBlocProvider(
+        providers: [
+          BlocProvider<WeatherBloc>(create: (_) => sl<WeatherBloc>()),
+          BlocProvider<BookmarkBloc>(create: (_) => sl<BookmarkBloc>()),
+        ],
+        child: MaterialApp.router(
+          theme: AppTheme.light,
+          scaffoldMessengerKey: AppToast.messengerKey,
+          debugShowCheckedModeBanner: kDebugMode,
+          routerConfig: appRouter,
         ),
       );
     }
@@ -42,3 +42,4 @@ class WeatherApp extends StatelessWidget {
     return const SizedBox.shrink();
   }
 }
+
