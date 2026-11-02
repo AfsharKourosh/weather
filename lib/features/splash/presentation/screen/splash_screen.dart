@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:weather/core/responsive/media_query_extensions.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -19,31 +20,18 @@ class SplashScreen extends StatelessWidget {
                 children: [
                   Image.asset(
                     "assets/images/logo.png",
-                    // width: context.sizes.of(72),
+                    width:120,
                   ),
                   FutureBuilder<String>(
                     future: getAppVersion(),
                     builder: (context, version) =>
-                        Text('ورژن ${version.data ?? ''}'),
+                        Text('ورژن ${version.data}',style: TextStyle(fontSize: 20,color: Colors.black),),
                   ),
-                  // SizedBox(height: context.sizes.of(10)),
-                  // Text(
-                  //   "کاواتل - پیام‌رسان آنلاین",
-                  //   style: context.theme.textTheme.titleMedium?.copyWith(
-                  //     fontWeight: FontWeight.w600,
-                  //   ),
-                  // ),
                 ],
               ),
             ),
           ),
-          // Text(
-          //   "ورژن ${AppUtils.appVersion}",
-          //   style: context.theme.textTheme.titleMedium?.copyWith(
-          //     color: context.colors.textFaint,
-          //   ),
-          // ),
-          // SizedBox(height: context.height * 0.09),
+          
         ],
       ),
     );
