@@ -13,6 +13,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  
     bool _isChecking = true;
   bool _hasPermissionError = false;
   bool _isPermanentlyDenied = false;
@@ -29,13 +30,14 @@ class _SplashScreenState extends State<SplashScreen> {
     if (!mounted) return;
   final camera = await Permission.camera.request();
   final microphone = await Permission.microphone.request();
- if (camera.isGranted && microphone.isGranted) {
-    context.go(AppRoutes.appProvider);
-  } else {
-    setState(() {
-      _hasPermissionError = true;
-    });
-  }  }
+//  if (camera.isGranted && microphone.isGranted) {
+//     context.go(AppRoutes.appProvider);
+//   } else {
+//     setState(() {
+//       _hasPermissionError = true;
+//     });
+//   }  
+  }
 
   Future<void> _checkPermissions() async {
     setState(() {

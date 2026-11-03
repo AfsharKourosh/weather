@@ -45,12 +45,12 @@ class _CurentWeatherScreenState extends State<CurentWeatherScreen>
     });
   }
 
-  @override
-  void dispose() {
-    _textEditingController.dispose();
-    _searchFocusNode.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   _textEditingController.dispose();
+  //   _searchFocusNode.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {

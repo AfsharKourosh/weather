@@ -33,14 +33,16 @@ class InfoWeather extends StatelessWidget {
       (title: 'humidity', value: '${weather.main?.humidity ?? '--'}%'),
     ];
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        for (int i = 0; i < items.length; i++) ...[
-          if (i > 0) const InfoDivider(),
-          InfoItem(title: items[i].title, value: items[i].value, style: theme),
+    return SingleChildScrollView(scrollDirection: Axis.horizontal,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          for (int i = 0; i < items.length; i++) ...[
+            if (i > 0) const InfoDivider(),
+            InfoItem(title: items[i].title, value: items[i].value, style: theme),
+          ],
         ],
-      ],
+      ),
     );
   }
 }
